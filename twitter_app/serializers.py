@@ -15,5 +15,4 @@ class KeywordSerializer(serializers.Serializer):
     count = serializers.IntegerField()
 
 class UsernameSerializer(serializers.Serializer):
-    username = serializers.CharField(max_length=15)
-    
+    username = serializers.CharField(max_length=100)
