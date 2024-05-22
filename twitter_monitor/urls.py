@@ -16,9 +16,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-
+from twitter_app.views import TweetView, MonitorTweetsView
 urlpatterns = [
     path('admin/', admin.site.urls),
-    Path('tweet/', TweetView.as_view(), name='Tweet'),
+    path('tweet/', TweetView.as_view(), name='Tweet'),
     path('monitor/', MonitorTweetsView.as_view(), name='monitor-tweets')
 ]
