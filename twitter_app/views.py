@@ -32,3 +32,15 @@ class MonitorTweetsView(APIView):
             )
             return Response(tweets, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class UserInfoView(APIView):
+    def post(self, request):
+        serializer = UsernameSerializer(data=request.data)
+        if serializer.is_valid():
+            user_info = twitter_service.get_user_info(serializer.validated_data['username'])
+            if user_info:
+                return Response(user_info, status=status.HTTP_200_OK)
+            return Response({'error': 'User not found or API error'}, status=status.HTTP_400_NOT_FOUND)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+           
