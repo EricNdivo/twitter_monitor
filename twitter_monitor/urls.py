@@ -16,10 +16,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from twitter_app.views import TweetView, MonitorTweetsView, UserInfoView
+from twitter_app.views import TweetView, MonitorTweetsView, UserInfoView, ReplyTweetView, UserTimelineView
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/tweet/', TweetView.as_view(), name='Tweet'),
     path('api/monitor/', MonitorTweetsView.as_view(), name='monitor-tweets'),
     path('api/user_info/',UserInfoView.as_view(), name='user_info'),
+    path('api/reply_tweet/', ReplyTweetView.as_view(), name='reply_tweet'),
+    path('api/user_timeline/',UserTimelineView.as_view(),name='user_timeline'),
+
 ]
