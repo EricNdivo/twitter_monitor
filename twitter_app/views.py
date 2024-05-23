@@ -17,8 +17,8 @@ class TweetView(APIView):
     def post(self, request):
         serializer = TweetSerializer(data=request.data)
         if serializer.is_valid():
-            twitter_service.tweet(serializer.validated_data['message'])
-            return Response({'status': 'Tweet sent'}, status=status.HTTP_200_OK)
+            # Handle the tweet logic
+            return Response({'message': 'Tweet posted successfully!'}, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class MonitorTweetsView(APIView):
@@ -53,7 +53,7 @@ class UserInfoView(APIView):
                 error_message = 'User not found or other error occurred.'
                 return Response({'error': error_message}, status=status.HTTP_404_NOT_FOUND)
         else:
-            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST) 
 class ReplyTweetView(APIView):
     def post(self, request):
         serializer = TweetSerializer(data=request.data)

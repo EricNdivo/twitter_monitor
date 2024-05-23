@@ -78,11 +78,11 @@ WSGI_APPLICATION = 'twitter_monitor.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'postgres',
-        'USER': '#',
-        'PASSWORD': '#',
-        'HOST': '#',  
-        'PORT': '#',       
+        'NAME': 'twitter_monitor',
+        'USER': 'eric',
+        'PASSWORD': 'sentinel90',
+        'HOST': '127.0.0.1',  
+        'PORT': '5432',       
     }
 }
 

@@ -24,5 +24,6 @@ urlpatterns = [
     path('api/user_info/',UserInfoView.as_view(), name='user_info'),
     path('api/reply_tweet/', ReplyTweetView.as_view(), name='reply_tweet'),
     path('api/user_timeline/',UserTimelineView.as_view(),name='user_timeline'),
+    path('tweet/', TweetView.as_view(), name='tweet'),
 
 ]

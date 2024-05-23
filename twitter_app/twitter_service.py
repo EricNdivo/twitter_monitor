@@ -1,5 +1,6 @@
 import tweepy
 from django.conf import settings
+
 class TwitterService:
     def __init__(self, api_key, api_secret_key, access_token, access_token_secret):
         auth = tweepy.OAuthHandler(api_key, api_secret_key)
@@ -11,13 +12,15 @@ class TwitterService:
             self.api.update_status(status=message)
         except tweepy.TweepyException as e:
             print(f"Error: {e}")
-    def get_tweets(self, keyword, count=10):
+
+    def get_tweets(self, query, count=10):
         try:
-            tweets = self.api.search(q=keyword, count=count, tweets_mode='extended')
-            return[{'text':tweet.full_text, 'user': tweet.user.screen_name} for tweet in tweets]
+            tweets = self.api.search(q=query, count=count, tweets_mode='extended')
+            return [{'text': tweet.full_text, 'user': tweet.user.screen_name} for tweet in tweets]
         except tweepy.TweepyException as e:
-            print(f"Error: {e}") 
+            print(f"Error: {e}")
             return []
+
     def get_user_info(self, username):
         try:
             user = self.api.get_user(screen_name=username)
@@ -29,7 +32,7 @@ class TwitterService:
                 'description': user.description,
                 'followers_count': user.followers_count,
                 'friends_count': user.friends_count,
-                'statuses_count': user.statuses_count
+                'statuses_count': user.statuses_count,
             }
             return user_info
         except tweepy.TweepyException as e:
@@ -39,12 +42,11 @@ class TwitterService:
             print(f"An unexpected error occurred: {e}")
             return None
 
-    def reply_to_tweet(self, mssage, tweet_id):
+    def reply_to_tweet(self, message, tweet_id):
         try:
             self.api.update_status(status=message, in_reply_to_status_id=tweet_id, auto_populate_reply_metadata=True)
         except tweepy.TweepyException as e:
             print(f"Error: {e}")
-
 
     def get_user_timeline(self, username, count=10):
         try:
